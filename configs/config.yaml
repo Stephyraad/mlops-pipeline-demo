@@ -31,14 +31,17 @@ data:
   features_to_drop: 
     - Employee_ID
 
-
 training:
   test_size: 0.2
   validation_size: 0.2
   random_state: 1234
 
-model:
-  type: RandomForestClassifier
+model_types:
+  - logistic_regression
+  - random_forest_classifier
+
+random_forest_classifier:
+  name: RandomForestClassifier
   params: 
     n_estimator: 200
     random_state: 1234
@@ -47,8 +50,10 @@ model:
 
 
 logistic_regression:
-  max_iter: 1000
-  class_weight: balanced
+  name: LogisticRegression
+  params:
+    max_iter: 1000
+    class_weight: balanced
 
 
 
