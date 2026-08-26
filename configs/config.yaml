@@ -1,0 +1,54 @@
+data:
+  filepath: data/processed/employee_attrition_dataset.csv
+  target: Attrition
+  feature_types:
+    ordinal:
+      - Job_Level
+    nominal:
+      - Gender
+      - Marital_Status
+      - Department
+      - Job_Role
+      - Overtime
+    numerical:
+      - Age
+      - Monthly_Income
+      - Hourly_Rate
+      - Years_at_Company
+      - Years_in_Current_Role
+      - Years_Since_Last_Promotion
+      - Work_Life_Balance
+      - Job_Satisfaction
+      - Performance_Rating
+      - Training_Hours_Last_Year
+      - Project_Count
+      - Average_Hours_Worked_Per_Week
+      - Absenteeism
+      - Work_Environment_Satisfaction
+      - Relationship_with_Manager
+      - Job_Involvement
+      - Number_of_Companies_Worked
+  features_to_drop: 
+    - Employee_ID
+
+
+training:
+  test_size: 0.2
+  validation_size: 0.2
+  random_state: 1234
+
+model:
+  type: RandomForestClassifier
+  params: 
+    n_estimator: 200
+    random_state: 1234
+    max_depth: 10
+    class_weight: balanced
+
+
+logistic_regression:
+  max_iter: 1000
+  class_weight: balanced
+
+
+
