@@ -76,3 +76,5 @@ hist_gradient_boosting_classifier:
     class_weight: balanced
     random_state: 1234
 
+reports:
+  dirpath: 'reports/'
