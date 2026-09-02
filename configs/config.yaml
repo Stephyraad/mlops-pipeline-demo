@@ -6,6 +6,12 @@ data:
   feature_types:
     ordinal:
       - Job_Level
+      - Work_Life_Balance
+      - Job_Satisfaction
+      - Performance_Rating
+      - Work_Environment_Satisfaction
+      - Relationship_with_Manager
+      - Job_Involvement
     nominal:
       - Gender
       - Marital_Status
@@ -19,16 +25,10 @@ data:
       - Years_at_Company
       - Years_in_Current_Role
       - Years_Since_Last_Promotion
-      - Work_Life_Balance
-      - Job_Satisfaction
-      - Performance_Rating
       - Training_Hours_Last_Year
       - Project_Count
       - Average_Hours_Worked_Per_Week
       - Absenteeism
-      - Work_Environment_Satisfaction
-      - Relationship_with_Manager
-      - Job_Involvement
       - Number_of_Companies_Worked
   features_to_drop: 
     - Employee_ID
