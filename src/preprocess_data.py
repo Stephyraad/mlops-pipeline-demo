@@ -1,5 +1,3 @@
-
-
 import pandas as pd
 from pathlib import Path
 from sklearn.pipeline import Pipeline
@@ -28,7 +26,7 @@ def print_dataframe_info(df: pd.DataFrame) -> None:
 def drop_features(df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     df = df.copy()
     return df.drop(columns=columns)
-
+       
 
 def split_features_target(df: pd.DataFrame, target_col: str = DEFAULT_TARGET) -> tuple[pd.DataFrame, pd.Series]:
     df = df.copy()
@@ -51,7 +49,7 @@ def split_dataframe(
     return features_train, features_test, target_train, target_test
 
 
-def build_features_preprocessor(
+def build_preprocessing_pipeline(
         numerical_features: list[str],
         nominal_features: list[str],
         ordinal_features: list[str],
@@ -72,7 +70,7 @@ def build_features_preprocessor(
 
     ordinal_pipeline = Pipeline(steps=[
         ('imputer', SimpleImputer(strategy='most_frequent')),
-        ('encoder', OrdinalEncoder(categories=[ordinal_order] if ordinal_order else 'auto', handle_unknown='use_encoded_value', unknown_value=-1))
+        ('encoder', OrdinalEncoder(categories=[ordinal_order] * len(ordinal_features) if ordinal_order else 'auto', handle_unknown='use_encoded_value', unknown_value=-1))
     ])
 
     transformers = [

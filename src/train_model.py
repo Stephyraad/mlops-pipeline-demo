@@ -1,7 +1,7 @@
 # import yaml
-import numpy as np
-import pandas as pd
-from pathlib import Path
+# import numpy as np
+# import pandas as pd
+# from pathlib import Path
 import mlflow
 import mlflow.sklearn
 
@@ -15,8 +15,8 @@ from preprocess_data import (
     build_preprocessing_pipeline
 )
 from build_model import build_model
+from monitor_drift import build_drift_report
 from evaluate_model import calculate_metrics, print_metrics
-
 
 
 def train_model(config: dict[str, any], model_type: str):
@@ -29,6 +29,13 @@ def train_model(config: dict[str, any], model_type: str):
     features, target = split_features_target(df, data_config.get('target'))
     features_train, features_val, target_train, target_val = split_dataframe(features, target, config['training'].get('test_size'))
 
+
+    build_drift_report(
+        reference_data=features_train,   
+        current_data=features_val,    
+        output_path=f"{config['reports'].get('dirpath')}/drift_report.html",  
+    )
+    
     feature_types = data_config.get('feature_types')
     preprocessor_pipeline = build_preprocessing_pipeline(
         numerical_features= feature_types.get('numerical'),
@@ -45,6 +52,7 @@ def train_model(config: dict[str, any], model_type: str):
 
     with mlflow.start_run(run_name=model_type) as active_run:
         mlflow.log_params(model_config.get('params'))  
+        mlflow.log_param(config['evaluation'].get('threshold'))
 
         model_pipeline.fit(features_train, target_train_processed)
    
@@ -56,7 +64,8 @@ def train_model(config: dict[str, any], model_type: str):
         # print('AFTER MODEL PREDICT')
    
         metrics_dict = calculate_metrics(target_val_processed, predictions)
-    
+        print_metrics(model_type, metrics_dict)
+
         mlflow.log_metrics(metrics_dict)
         mlflow.sklearn.log_model(
             model_pipeline, 
@@ -66,6 +75,7 @@ def train_model(config: dict[str, any], model_type: str):
 
         run_id = mlflow.active_run().info.run_id
 
+        
     # --------------------------
     # probs = model_pipeline.predict_proba(features_val)[:, 1]
     # print(np.sort(probs)[-20:])   # the 20 highest predicted "Yes" probabilities

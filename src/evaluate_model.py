@@ -16,8 +16,12 @@ def calculate_metrics(target:pd.Series, predictions: np.ndarray) -> dict[str, fl
         'Precision Score':precision_score(target, predictions)
     }
 
-def print_metrics(metrics: dict[str, float]):
-    print("Model Performance")
+
+def print_metrics(model_type: str, metrics: dict[str, float]):
+    print("\nModel Performance")
     print("-" * 30)
+    print(f"{'Model:':<15} {model_type}")
+    print()
     for name, value in metrics.items():
         print(f"{name:<20} {value:.4f}")
+    print()
