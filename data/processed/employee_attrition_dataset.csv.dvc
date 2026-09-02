@@ -1,0 +1,5 @@
+outs:
+- md5: 81783d37e64b0e9dc99474f25bd2a8d6
+  size: 95765
+  hash: md5
+  path: employee_attrition_dataset.csv
