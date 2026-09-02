@@ -1,0 +1,83 @@
+project:
+  name: employee_attrition_prediction
+data:
+  filepath: data/processed/employee_attrition_dataset.csv
+  target: Attrition
+  feature_types:
+    ordinal:
+      - Job_Level
+      - Work_Life_Balance
+      - Job_Satisfaction
+      - Performance_Rating
+      - Work_Environment_Satisfaction
+      - Relationship_with_Manager
+      - Job_Involvement
+    nominal:
+      - Gender
+      - Marital_Status
+      - Department
+      - Job_Role
+      - Overtime
+    numerical:
+      - Age
+      - Monthly_Income
+      - Hourly_Rate
+      - Years_at_Company
+      - Years_in_Current_Role
+      - Years_Since_Last_Promotion
+      - Training_Hours_Last_Year
+      - Project_Count
+      - Average_Hours_Worked_Per_Week
+      - Absenteeism
+      - Number_of_Companies_Worked
+  features_to_drop: 
+    - Employee_ID
+
+training:
+  test_size: 0.2
+  validation_size: 0.2
+  random_state: 1234
+
+model_types:
+  - logistic_regression
+  - random_forest_classifier
+  - gradient_boosting_classifier
+  - hist_gradient_boosting_classifier
+
+random_forest_classifier:
+  name: RandomForestClassifier
+  params: 
+    n_estimators: 400
+    max_depth: 20
+    class_weight: balanced
+    random_state: 1234
+
+logistic_regression:
+  name: LogisticRegression
+  params:
+    max_iter: 1000
+    class_weight: balanced
+    random_state: 1234
+
+gradient_boosting_classifier:
+  name: GradientBoostingClassifier
+  params:
+    n_estimators: 100                
+    learning_rate: 0.1             
+    max_depth: 3
+    random_state: 1234
+
+hist_gradient_boosting_classifier:
+  name: HistGradientBoostingClassifier
+  params:
+    max_iter: 200
+    learning_rate: 0.1
+    max_depth: null
+    class_weight: balanced
+    random_state: 1234
+
+evaluation:
+  threshold: 0.35
+  
+reports:
+  dirpath: 'reports/'
