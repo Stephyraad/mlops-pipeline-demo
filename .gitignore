@@ -1,0 +1,9 @@
+data/processed/*.csv
+!data/processed/*.csv.dvc
+
+.venv/
+venv/
+
+mlruns/
+reports/
+
