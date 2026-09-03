@@ -57,9 +57,7 @@ def train_model(config: dict[str, any], model_type: str):
         print(model_pipeline.named_steps['model'].get_params())
         predictions = model_pipeline.predict(features_val)
 
-        # print('PREDICC UNIQUE')
         # print(np.unique(predictions, return_counts=True))
-        # print('AFTER MODEL PREDICT')
    
         metrics_dict = calculate_metrics(target_val_processed, predictions)
         print_metrics(model_type, metrics_dict)
