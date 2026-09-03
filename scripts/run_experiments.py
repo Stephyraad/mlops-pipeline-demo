@@ -12,7 +12,7 @@ def load_config(filepath):
 
 
 def main() -> None:
-    DEFAULT_CONFIG_PATH = "configs/config.yaml"
+    DEFAULT_CONFIG_PATH = "configs/config.yml"
     config = load_config(DEFAULT_CONFIG_PATH)
 
     mlflow.set_experiment(config['project'].get('name'))

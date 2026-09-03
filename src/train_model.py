@@ -1,9 +1,6 @@
-# import yaml
-# import numpy as np
-# import pandas as pd
-# from pathlib import Path
 import mlflow
 import mlflow.sklearn
+from datetime import datetime
 
 from sklearn.dummy import DummyClassifier
 
@@ -29,11 +26,12 @@ def train_model(config: dict[str, any], model_type: str):
     features, target = split_features_target(df, data_config.get('target'))
     features_train, features_val, target_train, target_val = split_dataframe(features, target, config['training'].get('test_size'))
 
-
+    current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    output_path=f"{config['reports'].get('dirpath')}/drift_report_{current_datetime}.html"
     build_drift_report(
         reference_data=features_train,   
         current_data=features_val,    
-        output_path=f"{config['reports'].get('dirpath')}/drift_report.html",  
+        output_path=output_path,  
     )
     
     feature_types = data_config.get('feature_types')
@@ -52,7 +50,7 @@ def train_model(config: dict[str, any], model_type: str):
 
     with mlflow.start_run(run_name=model_type) as active_run:
         mlflow.log_params(model_config.get('params'))  
-        mlflow.log_param(config['evaluation'].get('threshold'))
+        # mlflow.log_param(config['evaluation'].get('threshold'))
 
         model_pipeline.fit(features_train, target_train_processed)
    
@@ -87,13 +85,3 @@ def train_model(config: dict[str, any], model_type: str):
     # dummy.fit(features_train, target_train_processed)
     # print("DUMMY")
     # print(accuracy_score(target_val_processed, dummy.predict(features_val)))
-
-
-# def main() -> None:
-#     CONFIG_PATH = "configs/config.yaml"
-#     config = load_config(CONFIG_PATH)
-
-#     train_model(config)
-
-# if __name__ == "__main__":
-#     main()
