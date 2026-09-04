@@ -1,5 +1,6 @@
 data/processed/*.csv
 !data/processed/*.csv.dvc
+!data/processed/employee_attrition_dataset.csv
 
 .venv/
 venv/

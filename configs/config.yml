@@ -80,4 +80,4 @@ evaluation:
   threshold: 0.35
   
 reports:
-  dirpath: 'reports/'
+  dirpath: 'reports'
