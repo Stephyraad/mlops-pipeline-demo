@@ -2,6 +2,7 @@
 
 ## Project Description
 
+An end-to-end MLOps pipeline that predicts employee attrition from HR data. Beyond the model itself, this repo demonstrates the surrounding workflow: config-driven training and experiment comparison via MLflow, data drift monitoring with Evidently, an automated test suite, and a CI pipeline that runs on every push.
 
 ## Data Description
 - **Employee_ID**: Unique identifier for each employee.
@@ -14,7 +15,7 @@
 - **Monthly_Income**: Monthly salary of the employee.
 - **Hourly_Rate**: Rate per hour for hourly employees.
 - **Years_at_Company**: Number of years the employee has been with the company.
-- ****Years_in_Current_Role**: Number of years the employee has been in their current role.
+- **Years_in_Current_Role**: Number of years the employee has been in their current role.
 - **Years_Since_Last_Promotion**: Time since the employee’s last promotion.
 - **Work_Life_Balance**: Rating of work-life balance.
 - **Job_Satisfaction**: Rating of job satisfaction (1-5 scale).
