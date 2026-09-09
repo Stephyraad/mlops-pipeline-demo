@@ -70,16 +70,3 @@ def train_model(config: dict[str, any], model_type: str):
         )
 
         run_id = mlflow.active_run().info.run_id
-
-        
-    # --------------------------
-    # probs = model_pipeline.predict_proba(features_val)[:, 1]
-    # print(np.sort(probs)[-20:])   # the 20 highest predicted "Yes" probabilities
-    # print(probs.mean())            # average predicted probability across all validation rows
-    # print(probs.max()) 
-
-    # -------------- DUMMY CLASSIFIER
-    # dummy = DummyClassifier(strategy="most_frequent")
-    # dummy.fit(features_train, target_train_processed)
-    # print("DUMMY")
-    # print(accuracy_score(target_val_processed, dummy.predict(features_val)))
